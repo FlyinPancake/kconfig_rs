@@ -1,4 +1,4 @@
-use crate::kconfig_parser::kconfig_parser_state::{Building, Done, KconfigParserState, Parsing};
+use crate::parser::kconfig_parser_state::{Building, Done, KconfigParserState, Parsing};
 use std::marker::PhantomData;
 use std::path::Path;
 

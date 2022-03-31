@@ -1,5 +1,6 @@
-pub mod kconfig_parser;
-pub mod kconfig_structure;
+pub mod parser;
+pub mod structure;
+pub mod errors;
 
 #[cfg(test)]
 mod tests {

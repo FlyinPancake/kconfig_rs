@@ -1,5 +1,5 @@
-use crate::kconfig_structure::kconfig_node::KconfigNode;
-use crate::kconfig_structure::kconfig_node_children::KconfigNodeChildren;
+use crate::structure::kconfig_node::KconfigNode;
+use crate::structure::kconfig_node_children::KconfigNodeChildren;
 use uuid::Uuid;
 
 pub struct KconfigMenuNode {

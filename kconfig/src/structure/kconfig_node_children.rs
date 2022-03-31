@@ -1,5 +1,5 @@
-use crate::kconfig_structure::kconfig_node::KconfigNode;
-use crate::kconfig_structure::kconfig_path::Traversable;
+use crate::structure::kconfig_node::KconfigNode;
+use crate::structure::kconfig_path::Traversable;
 use std::collections::HashMap;
 use uuid::Uuid;
 
@@ -42,5 +42,17 @@ impl Traversable for KconfigNodeChildren {
                 },
             }
         }
+    }
+}
+
+impl KconfigNodeChildren {
+    pub(crate) fn new_empty() -> Self {
+        Self {
+            children: HashMap::new(),
+        }
+    }
+
+    pub(crate) fn add_children(&mut self, node: KconfigNode) {
+        self.children.insert(Uuid::new_v4(), node);
     }
 }

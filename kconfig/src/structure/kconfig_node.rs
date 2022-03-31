@@ -1,4 +1,4 @@
-use crate::kconfig_structure::nodes::{
+use crate::structure::nodes::{
     KconfigConfigNode, KconfigIfNode, KconfigMenuConfigNode, KconfigMenuNode,
 };
 

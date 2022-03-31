@@ -1,4 +1,4 @@
-use crate::kconfig_structure::kconfig_symbol::KconfigSymbol;
+use crate::structure::kconfig_symbol::KconfigSymbol;
 
 pub struct KconfigExpression {
     pub source: String,

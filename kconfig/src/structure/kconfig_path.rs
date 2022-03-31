@@ -1,4 +1,4 @@
-use crate::kconfig_structure::kconfig_node::KconfigNode;
+use crate::structure::kconfig_node::KconfigNode;
 use uuid::Uuid;
 
 pub struct KconfigPath {
