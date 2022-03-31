@@ -3,13 +3,14 @@ use crate::parser::utils::get_line_indent::get_line_indent;
 use crate::parser::utils::rdp::ParseSpan;
 use crate::structure::property::KconfigHelpProperty;
 
-pub fn parse_and_span_kconfig_help_property(span: ParseSpan) -> Result<(KconfigHelpProperty, usize), ParserError> {
+pub fn parse_and_span_kconfig_help_property(
+    span: ParseSpan,
+) -> Result<(KconfigHelpProperty, usize), ParserError> {
     span.non_empty_or()?;
     let mut help_text = String::new();
 
     let mut last_line_index = 0;
     let mut to_match_indent = None;
-
 
     for line_index in 1..span.source_span.len() {
         let line = span.source_span[line_index];
@@ -28,5 +29,8 @@ pub fn parse_and_span_kconfig_help_property(span: ParseSpan) -> Result<(KconfigH
         last_line_index = line_index;
     }
 
-    Ok((KconfigHelpProperty::from_text(help_text.trim().to_string()), last_line_index))
+    Ok((
+        KconfigHelpProperty::from_text(help_text.trim().to_string()),
+        last_line_index,
+    ))
 }

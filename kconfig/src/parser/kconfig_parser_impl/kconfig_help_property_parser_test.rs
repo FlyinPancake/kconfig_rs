@@ -9,8 +9,7 @@ fn happy_path_help_parsing() {
         \tdepline\n\
         \tdepline\n\
         ";
-    let lines_iter = source.lines()
-        .collect::<Vec<&str>>();
+    let lines_iter = source.lines().collect::<Vec<&str>>();
     let span = ParseSpan::new(&lines_iter[..]);
 
     let parse_res = parse_and_span_kconfig_help_property(span).unwrap();

@@ -22,17 +22,11 @@ mod test {
 
     #[test]
     fn basic_indent_count_works_one() {
-        assert_eq!(
-            get_line_indent("\t\t\thello world lmao."),
-            24
-        );
+        assert_eq!(get_line_indent("\t\t\thello world lmao."), 24);
     }
 
     #[test]
     fn basic_indent_count_works_two() {
-        assert_eq!(
-            get_line_indent("  \t\thello world \t lmao."),
-            18
-        );
+        assert_eq!(get_line_indent("  \t\thello world \t lmao."), 18);
     }
 }

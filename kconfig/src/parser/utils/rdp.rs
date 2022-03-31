@@ -6,14 +6,14 @@ pub struct ParseSpan<'a, 's> {
 
 impl<'a, 's> ParseSpan<'a, 's> {
     pub fn new(source_span: &'a [&'s str]) -> Self {
-        Self {
-            source_span,
-        }
+        Self { source_span }
     }
 
     pub fn non_empty_or(&self) -> Result<(), ParserError> {
         if self.source_span.len() == 0 {
-            Err(ParserError::Internal("Expected a non empty span.".to_string()))
+            Err(ParserError::Internal(
+                "Expected a non empty span.".to_string(),
+            ))
         } else {
             Ok(())
         }

@@ -1,9 +1,8 @@
 #![feature(option_result_contains)]
+pub mod errors;
 #[deny(unused_imports)]
-
 pub mod parser;
 pub mod structure;
-pub mod errors;
 
 #[cfg(test)]
 mod tests {

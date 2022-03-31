@@ -1,6 +1,6 @@
-pub mod kconfig_node_children_parser;
-pub mod kconfig_menu_node_parser;
 pub mod kconfig_help_property_parser;
+pub mod kconfig_menu_node_parser;
+pub mod kconfig_node_children_parser;
 
 #[cfg(test)]
 mod kconfig_help_property_parser_test;

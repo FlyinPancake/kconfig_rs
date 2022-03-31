@@ -14,7 +14,7 @@ pub fn parse_kconfig_node_children(span: &ParseSpan) -> Result<KconfigNodeChildr
             match token {
                 "menu" => {
                     //let menu_span = ParseSpan::new(span.source_span[line_index..])
-                },
+                }
                 _ => {}
             }
         }

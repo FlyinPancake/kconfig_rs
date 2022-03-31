@@ -5,10 +5,8 @@ pub struct KconfigHelpProperty {
 }
 
 impl KconfigHelpProperty {
-    pub(crate) fn from_text(help_text: String) -> Self{
-        Self {
-            help_text,
-        }
+    pub(crate) fn from_text(help_text: String) -> Self {
+        Self { help_text }
     }
 }
 

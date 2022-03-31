@@ -16,8 +16,9 @@ pub fn find_index_of_next_keyword_in_span(keyword: &str, span: ParseSpan) -> Opt
 
         if let Some(first_token) = line_tokens.next() {
             if is_keyword_help_keyword(first_token) && !is_keyword_help_keyword(keyword) {
-                let (_, help_span_till) = parse_and_span_kconfig_help_property(span.get_with_start_at(line_index))
-                    .ok()?;
+                let (_, help_span_till) =
+                    parse_and_span_kconfig_help_property(span.get_with_start_at(line_index))
+                        .ok()?;
                 line_index = line_index + help_span_till;
             } else if first_token == keyword {
                 return Some(line_index);
@@ -48,14 +49,10 @@ mod test {
         \t\tkeke sajt\n\
         endmenu\n\
         ";
-        let lines_iter = source.lines()
-            .collect::<Vec<&str>>();
+        let lines_iter = source.lines().collect::<Vec<&str>>();
         let span = ParseSpan::new(&lines_iter[..]);
         assert_eq!(
-            find_index_of_next_keyword_in_span(
-                "endmenu",
-                span,
-            ),
+            find_index_of_next_keyword_in_span("endmenu", span,),
             Some(5)
         );
     }

@@ -11,7 +11,9 @@ fn happy_path_with_string_works() {
 
 #[test]
 fn happy_path_two() {
-    let mut iter = LineKConfigTokenizerIterator::from_line("kcon_fig_stug   \t\t\t     \"Hello \t  World!\" kekwow   ");
+    let mut iter = LineKConfigTokenizerIterator::from_line(
+        "kcon_fig_stug   \t\t\t     \"Hello \t  World!\" kekwow   ",
+    );
 
     assert_eq!(iter.next(), Some("kcon_fig_stug"));
     assert_eq!(iter.next(), Some("\"Hello \t  World!\""));
