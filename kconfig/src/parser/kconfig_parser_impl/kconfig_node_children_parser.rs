@@ -1,5 +1,6 @@
 use crate::errors::parser_error::ParserError;
 use crate::parser::utils::rdp::ParseSpan;
+use crate::parser::utils::tokenizer::LineKConfigTokenizerIterator;
 use crate::structure::kconfig_node_children::KconfigNodeChildren;
 
 pub fn parse_kconfig_node_children(span: &ParseSpan) -> Result<KconfigNodeChildren, ParserError> {
@@ -7,14 +8,12 @@ pub fn parse_kconfig_node_children(span: &ParseSpan) -> Result<KconfigNodeChildr
 
     for line_index in 0..span.source_span.len() {
         let line = &span.source_span[line_index];
-        let mut tokens = line.split_whitespace()
-            .map(|el| el.trim())
-            .filter(|el| !el.is_empty());
+        let mut tokens = LineKConfigTokenizerIterator::from_line(line);
 
-        if let Some(keyword_token) = tokens.next() {
-            match keyword_token {
+        if let Some(token) = tokens.next() {
+            match token {
                 "menu" => {
-
+                    //let menu_span = ParseSpan::new(span.source_span[line_index..])
                 },
                 _ => {}
             }

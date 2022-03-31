@@ -1,4 +1,5 @@
 #![feature(option_result_contains)]
+#[deny(unused_imports)]
 
 pub mod parser;
 pub mod structure;

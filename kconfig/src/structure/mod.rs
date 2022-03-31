@@ -6,3 +6,4 @@ pub mod kconfig_node_children;
 pub mod kconfig_symbol;
 pub mod nodes;
 pub mod kconfig_path;
+pub mod property;
