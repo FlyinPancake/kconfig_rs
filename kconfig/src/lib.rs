@@ -1,3 +1,5 @@
+#![feature(option_result_contains)]
+
 pub mod parser;
 pub mod structure;
 pub mod errors;

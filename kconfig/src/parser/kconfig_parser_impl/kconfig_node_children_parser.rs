@@ -1,5 +1,5 @@
 use crate::errors::parser_error::ParserError;
-use crate::parser::kconfig_parser_impl::rdp::ParseSpan;
+use crate::parser::utils::rdp::ParseSpan;
 use crate::structure::kconfig_node_children::KconfigNodeChildren;
 
 pub fn parse_kconfig_node_children(span: &ParseSpan) -> Result<KconfigNodeChildren, ParserError> {

@@ -1,5 +1,4 @@
 pub mod kconfig_node_children_parser;
-pub mod rdp;
 
 use crate::parser::kconfig_parser::KconfigParser;
 use crate::parser::kconfig_parser_state::Parsing;
