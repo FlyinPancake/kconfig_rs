@@ -8,3 +8,9 @@ pub enum ParserError {
     #[error("internal parser error:`{0}`")]
     Internal(String),
 }
+
+impl ParserError {
+    pub fn syntax(msg: &str) -> Self {
+        Self::Syntax(msg.to_string())
+    }
+}

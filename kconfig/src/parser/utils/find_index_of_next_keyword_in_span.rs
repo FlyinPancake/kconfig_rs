@@ -3,7 +3,7 @@ use crate::parser::utils::rdp::ParseSpan;
 use crate::parser::utils::tokenizer::LineKConfigTokenizerIterator;
 use crate::structure::property::is_keyword_help_keyword;
 
-pub fn find_index_of_next_keyword_in_span(keyword: &str, span: ParseSpan) -> Option<usize> {
+pub fn find_index_of_next_keyword_in_span(keyword: &str, span: &ParseSpan) -> Option<usize> {
     if span.non_empty_or().is_err() {
         return None;
     }

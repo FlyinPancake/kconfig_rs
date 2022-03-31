@@ -30,4 +30,8 @@ impl<'a, 's> ParseSpan<'a, 's> {
     pub fn get_with_end_at(&self, at: usize) -> ParseSpan {
         ParseSpan::new(&self.source_span[..at])
     }
+
+    pub fn get_with_bounds(&self, from: usize, to: usize) -> ParseSpan {
+        ParseSpan::new(&self.source_span[from..to])
+    }
 }
