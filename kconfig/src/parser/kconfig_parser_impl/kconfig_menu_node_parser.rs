@@ -13,10 +13,10 @@ fn get_empty_menu_node_from_header(
     let header_line = span.get_source_span()[0];
     let mut header_tokens = LineKConfigTokenizerIterator::from_line(header_line);
 
-    let no_header_error = ParserError::syntax_in_span_at("Expected header keyword", &span, 0);
+    let no_header_error = ParserError::syntax_in_span_at("Expected menu keyword", &span, 0);
     let header_keyword = header_tokens.next()
         .ok_or(no_header_error.clone())?;
-    if header_keyword == MENU_KEYWORD {
+    if header_keyword != MENU_KEYWORD {
         return Err(no_header_error);
     }
 
@@ -78,5 +78,30 @@ impl Parseable for KconfigMenuNode {
         menu_node.children = node_child;
 
         Ok(menu_node)
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use crate::parser::kconfig_parser_impl::parser_traits::{Parseable, ParsingContext};
+    use crate::parser::utils::parse_span::ParseSpan;
+    use crate::structure::nodes::KconfigMenuNode;
+
+    #[test]
+    fn happy_path_menu_parsing() {
+        let source = "menu \"Keksajtos kifliallarc\"\n\
+        \tdepends on sajtos kifle\n\
+        endmenu\n\
+        ";
+        let lines_iter = source.lines().collect::<Vec<&str>>();
+        let span = ParseSpan::from_source(&lines_iter[..], "test");
+        let context = ParsingContext {
+            config: &Default::default(),
+            span: &span,
+        };
+
+        let menu_node = KconfigMenuNode::parse(&context).unwrap();
+        assert_eq!(menu_node.name, "\"Keksajtos kifliallarc\"");
+        assert_eq!(menu_node.dependencies.dependencies.len(), 1);
     }
 }

@@ -1,5 +1,5 @@
 use thiserror::Error;
-use crate::parser::utils::parse_span::ParseSpan;
+use crate::parser::utils::parse_span::{LineSpan, ParseSpan};
 
 #[derive(Error, Debug, Clone)]
 pub enum ParserError {
@@ -22,6 +22,17 @@ impl ParserError {
                 msg,
                 span.get_filename(),
                 span.get_global_span().0 + offset,
+            ),
+        )
+    }
+
+    pub fn syntax_in_line_span(msg: &str, span: &LineSpan) -> Self {
+        Self::Syntax(
+            format!(
+                "{} in {}, line:{}",
+                msg,
+                span.get_filename(),
+                span.get_global_at(),
             ),
         )
     }

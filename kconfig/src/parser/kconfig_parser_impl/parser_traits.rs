@@ -1,6 +1,6 @@
 use crate::errors::parser_error::ParserError;
 use crate::parser::parser_config::ParserConfig;
-use crate::parser::utils::parse_span::ParseSpan;
+use crate::parser::utils::parse_span::{LineSpan, ParseSpan};
 
 pub struct ParsingContext<'c, 'p, 'a, 's, 'f> {
     pub config: &'c ParserConfig,
@@ -8,10 +8,10 @@ pub struct ParsingContext<'c, 'p, 'a, 's, 'f> {
     pub span: &'p ParseSpan<'a,'s,'f>,
 }
 
-pub struct LineParsingContext<'c, 's> {
+pub struct LineParsingContext<'c, 'p, 's, 'f> {
     pub config: &'c ParserConfig,
 
-    pub line: &'s str,
+    pub line: &'p LineSpan<'s, 'f>,
 }
 
 impl<'c, 'p, 'a, 's, 'f> ParsingContext<'c, 'p, 'a, 's, 'f> {
@@ -31,7 +31,7 @@ impl<'c, 'p, 'a, 's, 'f> ParsingContext<'c, 'p, 'a, 's, 'f> {
     ) -> LineParsingContext {
         LineParsingContext {
             config: self.config,
-            line: self.span.get_source_span()[offset],
+            line: &self.span.get_line_span_at(offset),
         }
     }
 }

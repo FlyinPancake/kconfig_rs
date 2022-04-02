@@ -48,6 +48,10 @@ impl<'s> LineKConfigTokenizerIterator<'s> {
             }
         });
     }
+
+    pub fn get_remaining_slice(&self) -> &'s str {
+        self.line[self.at_pos]
+    }
 }
 
 impl<'s> Iterator for LineKConfigTokenizerIterator<'s> {

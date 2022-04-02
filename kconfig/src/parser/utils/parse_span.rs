@@ -6,6 +6,26 @@ pub struct ParseSpan<'a, 's, 'f> {
     source_span: &'a [&'s str],
 }
 
+pub struct LineSpan<'s, 'f> {
+    filename: &'f str,
+    line: &'s str,
+    global_at: usize,
+}
+
+impl<'s, 'f> LineSpan<'s, 'f> {
+    pub fn get_line(&self) -> &'s str {
+        self.line
+    }
+
+    pub fn get_filename(&self) -> &'f str {
+        self.filename
+    }
+
+    pub fn get_global_at(&self) -> usize {
+        self.global_at
+    }
+}
+
 impl<'a, 's, 'f> ParseSpan<'a, 's, 'f> {
     pub fn from_source(source_span: &'a [&'s str], filename: &'f str) -> Self {
         Self {
@@ -63,6 +83,14 @@ impl<'a, 's, 'f> ParseSpan<'a, 's, 'f> {
 
     pub fn get_global_span(&self) -> (usize, usize) {
         self.global_span
+    }
+
+    pub fn get_line_span_at(&self, offset: usize) -> LineSpan<'s, 'f> {
+        LineSpan {
+            filename: self.filename,
+            line: self.source_span[offset],
+            global_at: self.global_span.0 + offset,
+        }
     }
 }
 
