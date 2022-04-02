@@ -20,3 +20,15 @@ fn happy_path_two() {
     assert_eq!(iter.next(), Some("kekwow"));
     assert_eq!(iter.next(), None);
 }
+
+#[test]
+fn skipps_lines_from_comment() {
+    let mut iter = LineKConfigTokenizerIterator::from_line(
+        "kconfig depends on #COMMMENT kek wow",
+    );
+
+    assert_eq!(iter.next(), Some("kconfig"));
+    assert_eq!(iter.next(), Some("depends"));
+    assert_eq!(iter.next(), Some("on"));
+    assert_eq!(iter.next(), None);
+}

@@ -8,3 +8,8 @@ pub const DEPENDS_KEYWORD: &'static str = "depends";
 pub const ON_KEYWORD: &'static str = "on";
 pub const VISIBLE_KEYWORD: &'static str = "visible";
 pub const IF_KEYWORD: &'static str = "if";
+pub const ENDIF_KEYWORD: &'static str = "endif";
+
+pub const COMMENT_KEYWORD: &'static str = "comment";
+
+pub const SOURCE_KEYWORD: &'static str = "source";

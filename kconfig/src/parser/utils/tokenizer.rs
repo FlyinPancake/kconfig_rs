@@ -71,6 +71,8 @@ impl<'s> Iterator for LineKConfigTokenizerIterator<'s> {
                     false
                 }
             });
+        } else if self.at_char.contains(&'#') {
+            return None;
         }
 
         self.advance_while_is_whitespace_is(false);
