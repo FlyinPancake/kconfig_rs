@@ -21,9 +21,9 @@ impl Parseable for KconfigNodeChildren {
                     MENU_KEYWORD => {
                         let menu_end_span = span.get_with_start_at(line_index);
                         let menu_end_at = find_index_of_next_keyword_in_context(END_MENU_KEYWORD,
-                                                                                &context.with_different_span(
-                                                                                    &menu_end_span,
-                                                                                ),
+                            &context.with_different_span(
+                                &menu_end_span,
+                            ),
                         )
                             .ok_or(ParserError::syntax("Expected a menu end keyword after a menu keyword."))?;
                         let menu_span = span.get_with_bounds(line_index, menu_end_at);
