@@ -31,7 +31,7 @@ impl<'a, 's, 'f> ParseSpan<'a, 's, 'f> {
         Self {
             filename,
             source_span,
-            global_span: (0, source_span.len()-1),
+            global_span: (0, source_span.len() - 1),
         }
     }
 
@@ -53,7 +53,7 @@ impl<'a, 's, 'f> ParseSpan<'a, 's, 'f> {
         Self {
             filename: self.filename,
             source_span: &self.source_span[at..],
-            global_span: (self.global_span.0+at, self.global_span.1),
+            global_span: (self.global_span.0 + at, self.global_span.1),
         }
     }
 
@@ -69,7 +69,7 @@ impl<'a, 's, 'f> ParseSpan<'a, 's, 'f> {
         Self {
             filename: self.filename,
             source_span: &self.source_span[from..=to],
-            global_span: (self.global_span.0+from, self.global_span.0+to),
+            global_span: (self.global_span.0 + from, self.global_span.0 + to),
         }
     }
 

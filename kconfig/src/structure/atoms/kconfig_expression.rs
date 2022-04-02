@@ -40,7 +40,7 @@ mod test {
                 KconfigSymbol::new("ASDF".to_string()),
                 KconfigSymbol::new("KEKWUT".to_string()),
                 KconfigSymbol::new("LOL".to_string()),
-                KconfigSymbol::new("K".to_string())
+                KconfigSymbol::new("K".to_string()),
             ],
             expression.included_symbols()
         )

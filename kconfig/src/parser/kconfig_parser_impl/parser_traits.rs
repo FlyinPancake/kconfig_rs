@@ -5,7 +5,7 @@ use crate::parser::utils::parse_span::{LineSpan, ParseSpan};
 pub struct ParsingContext<'c, 'p, 'a, 's, 'f> {
     pub config: &'c ParserConfig,
 
-    pub span: &'p ParseSpan<'a,'s,'f>,
+    pub span: &'p ParseSpan<'a, 's, 'f>,
 }
 
 pub struct LineParsingContext<'c, 'p, 's, 'f> {
@@ -17,7 +17,7 @@ pub struct LineParsingContext<'c, 'p, 's, 'f> {
 impl<'c, 'p, 'a, 's, 'f> ParsingContext<'c, 'p, 'a, 's, 'f> {
     pub fn with_different_span(
         &self,
-        new_span: &'p ParseSpan<'a,'s,'f>
+        new_span: &'p ParseSpan<'a, 's, 'f>,
     ) -> Self {
         Self {
             config: self.config,
@@ -51,5 +51,5 @@ pub trait ParseableFromLine
 pub trait ParseableWithUnknownSpan
     where Self: Sized + 'static
 {
-    fn parse_with_unknown_span<'c, 'p, 'a, 's, 'f>(context: &ParsingContext<'c, 'p, 'a, 's, 'f>) -> Result<(Self, ParseSpan<'a,'s,'f>), ParserError>;
+    fn parse_with_unknown_span<'c, 'p, 'a, 's, 'f>(context: &ParsingContext<'c, 'p, 'a, 's, 'f>) -> Result<(Self, ParseSpan<'a, 's, 'f>), ParserError>;
 }

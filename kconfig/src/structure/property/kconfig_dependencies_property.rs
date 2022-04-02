@@ -6,14 +6,14 @@ pub struct KconfigDependenciesProperty {
 
 impl KconfigDependenciesProperty {
     pub(crate) fn new_empty() -> Self {
-         Self {
-             dependencies: vec![],
-         }
+        Self {
+            dependencies: vec![],
+        }
     }
 
     pub fn add_dependency(
         &mut self,
-        dep: KconfigDependency
+        dep: KconfigDependency,
     ) {
         self.dependencies.push(dep);
     }

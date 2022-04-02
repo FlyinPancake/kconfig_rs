@@ -11,12 +11,12 @@ impl ParseableFromLine for KconfigDependency {
 
         if !tokens.next()
             .contains(&DEPENDS_KEYWORD) {
-            return Err(ParserError::syntax_in_line_span("Expected depends keyword here", &context.line))
+            return Err(ParserError::syntax_in_line_span("Expected depends keyword here", &context.line));
         }
 
         if !tokens.next()
             .contains(&ON_KEYWORD) {
-            return Err(ParserError::syntax_in_line_span("Expected on keyword here", &context.line))
+            return Err(ParserError::syntax_in_line_span("Expected on keyword here", &context.line));
         }
 
         let expr_source = tokens.get_remaining_slice().trim();

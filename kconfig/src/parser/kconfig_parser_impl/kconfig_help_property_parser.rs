@@ -7,7 +7,7 @@ use crate::structure::property::KconfigHelpProperty;
 impl ParseableWithUnknownSpan for KconfigHelpProperty {
     fn parse_with_unknown_span<'c, 'p, 'a, 's, 'f>(
         context: &ParsingContext<'c, 'p, 'a, 's, 'f>,
-    ) -> Result<(Self, ParseSpan<'a,'s,'f>), ParserError> {
+    ) -> Result<(Self, ParseSpan<'a, 's, 'f>), ParserError> {
         let span = context.span;
         span.non_empty_or()?;
         let mut help_text = String::new();

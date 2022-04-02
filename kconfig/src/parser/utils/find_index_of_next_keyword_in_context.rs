@@ -17,12 +17,12 @@ pub fn find_index_of_next_keyword_in_context(keyword: &str, context: &ParsingCon
         if let Some(first_token) = line_tokens.next() {
             if is_keyword_help_keyword(first_token) && !is_keyword_help_keyword(keyword) {
                 let help_max_span = span.get_with_start_at(line_index);
-                let (_ ,help_span) = KconfigHelpProperty::parse_with_unknown_span(
+                let (_, help_span) = KconfigHelpProperty::parse_with_unknown_span(
                     &context.with_different_span(
                         &help_max_span,
                     ),
                 ).ok()?;
-                line_index += help_span.len()-1;
+                line_index += help_span.len() - 1;
             } else if first_token == keyword {
                 return Some(line_index);
             }

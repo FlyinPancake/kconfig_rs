@@ -30,7 +30,7 @@ fn get_empty_menu_node_from_header(
 
 fn set_menu_properties_and_get_properties_end(
     context: &ParsingContext,
-    menu_node: &mut KconfigMenuNode
+    menu_node: &mut KconfigMenuNode,
 ) -> Result<usize, ParserError> {
     let property_span = context.span.get_with_bounds(1, context.span.len() - 1);
     let mut prop_end = 0;
@@ -43,14 +43,14 @@ fn set_menu_properties_and_get_properties_end(
             match keyword {
                 DEPENDS_KEYWORD => {
                     let line_span = property_span.get_line_span_at(
-                      line_index,
+                        line_index,
                     );
                     let depends = KconfigDependency::parse_from_line(
                         &context.get_line_context_with_span(&line_span),
                     )?;
                     menu_node.dependencies.add_dependency(depends);
-                },
-                VISIBLE_KEYWORD => {},
+                }
+                VISIBLE_KEYWORD => {}
                 _ => {
                     prop_end = line_index;
                     break;
@@ -74,7 +74,7 @@ impl Parseable for KconfigMenuNode {
 
         let prop_end =
             set_menu_properties_and_get_properties_end(context, &mut menu_node)?;
-        let child_span = span.get_with_bounds(prop_end, span.len()-2);
+        let child_span = span.get_with_bounds(prop_end, span.len() - 2);
         let node_child = KconfigNodeChildren::parse(
             &context.with_different_span(&child_span),
         )?;
