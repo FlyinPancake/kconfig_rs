@@ -25,13 +25,13 @@ impl<'c, 'p, 'a, 's, 'f> ParsingContext<'c, 'p, 'a, 's, 'f> {
         }
     }
 
-    pub fn line_context_at(
+    pub fn get_line_context_with_span(
         &self,
-        offset: usize,
-    ) -> LineParsingContext {
+        line: &'p LineSpan<'s, 'f>,
+    ) -> LineParsingContext<'c, 'p, 's, 'f> {
         LineParsingContext {
             config: self.config,
-            line: &self.span.get_line_span_at(offset),
+            line,
         }
     }
 }

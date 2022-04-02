@@ -50,7 +50,7 @@ impl<'s> LineKConfigTokenizerIterator<'s> {
     }
 
     pub fn get_remaining_slice(&self) -> &'s str {
-        self.line[self.at_pos]
+        &self.line[self.at_pos..]
     }
 }
 

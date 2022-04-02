@@ -10,15 +10,20 @@ impl ParseableFromLine for KconfigDependency {
         let mut tokens = LineKConfigTokenizerIterator::from_line(context.line.get_line());
 
         if !tokens.next()
-            .contains(DEPENDS_KEYWORD) {
+            .contains(&DEPENDS_KEYWORD) {
             return Err(ParserError::syntax_in_line_span("Expected depends keyword here", &context.line))
         }
 
         if !tokens.next()
-            .contains(ON_KEYWORD) {
+            .contains(&ON_KEYWORD) {
             return Err(ParserError::syntax_in_line_span("Expected on keyword here", &context.line))
         }
 
         let expr_source = tokens.get_remaining_slice().trim();
+        let expression = KconfigExpression::new(expr_source.to_string());
+
+        Ok(KconfigDependency {
+            expression,
+        })
     }
 }

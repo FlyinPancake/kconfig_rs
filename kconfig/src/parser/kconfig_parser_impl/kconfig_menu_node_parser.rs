@@ -42,8 +42,11 @@ fn set_menu_properties_and_get_properties_end(
         if let Some(keyword) = property_line_tokens.next() {
             match keyword {
                 DEPENDS_KEYWORD => {
+                    let line_span = property_span.get_line_span_at(
+                      line_index,
+                    );
                     let depends = KconfigDependency::parse_from_line(
-                        &context.line_context_at(line_index+1),
+                        &context.get_line_context_with_span(&line_span),
                     )?;
                     menu_node.dependencies.add_dependency(depends);
                 },
@@ -90,7 +93,7 @@ mod test {
     #[test]
     fn happy_path_menu_parsing() {
         let source = "menu \"Keksajtos kifliallarc\"\n\
-        \tdepends on sajtos kifle\n\
+        \tdepends on SAJTOS && KIFLI\n\
         endmenu\n\
         ";
         let lines_iter = source.lines().collect::<Vec<&str>>();
