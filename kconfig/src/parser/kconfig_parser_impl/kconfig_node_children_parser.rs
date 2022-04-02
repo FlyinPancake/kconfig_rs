@@ -38,6 +38,6 @@ impl Parseable for KconfigNodeChildren {
             }
         }
 
-        Err(ParserError::Syntax("asd".to_string()))
+        Ok(node_children)
     }
 }

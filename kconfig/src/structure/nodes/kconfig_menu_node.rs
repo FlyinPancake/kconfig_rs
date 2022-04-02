@@ -1,8 +1,19 @@
 use crate::structure::kconfig_node_children::KconfigNodeChildren;
-use uuid::Uuid;
+use crate::structure::property::KconfigDependenciesProperty;
 
 pub struct KconfigMenuNode {
     //TODO menu dependencies
-    pub id: Uuid,
+    pub name: String,
+    pub dependencies: KconfigDependenciesProperty,
     pub(crate) children: KconfigNodeChildren,
+}
+
+impl KconfigMenuNode {
+    pub(crate) fn new_empty() -> Self {
+        Self {
+            name: "".to_string(),
+            dependencies: KconfigDependenciesProperty::new_empty(),
+            children: KconfigNodeChildren::new_empty(),
+        }
+    }
 }

@@ -8,6 +8,12 @@ pub struct ParsingContext<'c, 'p, 'a, 's, 'f> {
     pub span: &'p ParseSpan<'a,'s,'f>,
 }
 
+pub struct LineParsingContext<'c, 's> {
+    pub config: &'c ParserConfig,
+
+    pub line: &'s str,
+}
+
 impl<'c, 'p, 'a, 's, 'f> ParsingContext<'c, 'p, 'a, 's, 'f> {
     pub fn with_different_span(
         &self,
@@ -18,12 +24,28 @@ impl<'c, 'p, 'a, 's, 'f> ParsingContext<'c, 'p, 'a, 's, 'f> {
             span: new_span,
         }
     }
+
+    pub fn line_context_at(
+        &self,
+        offset: usize,
+    ) -> LineParsingContext {
+        LineParsingContext {
+            config: self.config,
+            line: self.span.get_source_span()[offset],
+        }
+    }
 }
 
 pub trait Parseable
     where Self: Sized + 'static
 {
     fn parse(context: &ParsingContext) -> Result<Self, ParserError>;
+}
+
+pub trait ParseableFromLine
+    where Self: Sized + 'static
+{
+    fn parse_from_line(context: &LineParsingContext) -> Result<Self, ParserError>;
 }
 
 pub trait ParseableWithUnknownSpan
