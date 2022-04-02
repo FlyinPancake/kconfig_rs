@@ -1,5 +1,5 @@
 use crate::parser::kconfig_parser_impl::kconfig_help_property_parser::parse_and_span_kconfig_help_property;
-use crate::parser::utils::rdp::ParseSpan;
+use crate::parser::utils::parse_span::ParseSpan;
 use crate::parser::utils::tokenizer::LineKConfigTokenizerIterator;
 use crate::structure::property::is_keyword_help_keyword;
 
@@ -9,7 +9,7 @@ pub fn find_index_of_next_keyword_in_span(keyword: &str, span: &ParseSpan) -> Op
     }
 
     let mut line_index = 0;
-    let mut line = span.source_span[0];
+    let mut line = span.get_source_span()[0];
 
     loop {
         let mut line_tokens = LineKConfigTokenizerIterator::from_line(line);
@@ -29,7 +29,7 @@ pub fn find_index_of_next_keyword_in_span(keyword: &str, span: &ParseSpan) -> Op
         if line_index >= span.len() {
             break;
         }
-        line = span.source_span[line_index];
+        line = span.get_source_span()[line_index];
     }
 
     None
@@ -38,7 +38,7 @@ pub fn find_index_of_next_keyword_in_span(keyword: &str, span: &ParseSpan) -> Op
 #[cfg(test)]
 mod test {
     use crate::parser::utils::find_index_of_next_keyword_in_span::find_index_of_next_keyword_in_span;
-    use crate::parser::utils::rdp::ParseSpan;
+    use crate::parser::utils::parse_span::ParseSpan;
 
     #[test]
     fn finds_next_menu_end() {
@@ -50,9 +50,9 @@ mod test {
         endmenu\n\
         ";
         let lines_iter = source.lines().collect::<Vec<&str>>();
-        let span = ParseSpan::new(&lines_iter[..]);
+        let span = ParseSpan::from_source(&lines_iter[..], "test");
         assert_eq!(
-            find_index_of_next_keyword_in_span("endmenu", span,),
+            find_index_of_next_keyword_in_span("endmenu", &span),
             Some(5)
         );
     }
