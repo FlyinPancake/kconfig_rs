@@ -1,9 +1,7 @@
 pub mod kconfig_help_property_parser;
 pub mod kconfig_menu_node_parser;
 pub mod kconfig_node_children_parser;
-
-#[cfg(test)]
-mod kconfig_help_property_parser_test;
+pub mod parser_traits;
 
 use crate::parser::kconfig_parser::KconfigParser;
 use crate::parser::kconfig_parser_state::Parsing;

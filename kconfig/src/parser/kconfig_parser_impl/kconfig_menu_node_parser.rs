@@ -1,7 +1,9 @@
 use crate::errors::parser_error::ParserError;
-use crate::parser::utils::parse_span::ParseSpan;
+use crate::parser::kconfig_parser_impl::parser_traits::{Parseable, ParsingContext};
 use crate::structure::nodes::KconfigMenuNode;
 
-pub fn parse_kconfig_menu_node(_span: &ParseSpan) -> Result<KconfigMenuNode, ParserError> {
-    Err(ParserError::Syntax("unimplemented".to_string()))
+impl Parseable for KconfigMenuNode {
+    fn parse(_context: &ParsingContext) -> Result<Self, ParserError> {
+        Err(ParserError::Syntax("unimplemented".to_string()))
+    }
 }
