@@ -2,7 +2,7 @@ use crate::errors::parser_error::ParserError;
 use crate::parser::constants::IF_KEYWORD;
 use crate::parser::kconfig_parser_impl::parser_traits::{Parseable, ParsingContext};
 use crate::parser::utils::tokenizer::LineKConfigTokenizerIterator;
-use crate::structure::atoms::kconfig_expression::KconfigExpression;
+use crate::structure::atoms::KconfigExpression;
 use crate::structure::kconfig_node_children::KconfigNodeChildren;
 use crate::structure::nodes::KconfigIfNode;
 

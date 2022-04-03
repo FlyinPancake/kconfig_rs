@@ -2,8 +2,8 @@ use crate::errors::parser_error::ParserError;
 use crate::parser::constants::{DEPENDS_KEYWORD, ON_KEYWORD};
 use crate::parser::kconfig_parser_impl::parser_traits::{LineParsingContext, ParseableFromLine};
 use crate::parser::utils::tokenizer::LineKConfigTokenizerIterator;
-use crate::structure::atoms::kconfig_dependency::KconfigDependency;
-use crate::structure::atoms::kconfig_expression::KconfigExpression;
+use crate::structure::atoms::KconfigDependency;
+use crate::structure::atoms::KconfigExpression;
 
 impl ParseableFromLine for KconfigDependency {
     fn parse_from_line(context: &LineParsingContext) -> Result<Self, ParserError> {

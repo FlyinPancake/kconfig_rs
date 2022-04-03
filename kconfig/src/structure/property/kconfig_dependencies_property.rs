@@ -1,4 +1,4 @@
-use crate::structure::atoms::kconfig_dependency::KconfigDependency;
+use crate::structure::atoms::KconfigDependency;
 
 pub struct KconfigDependenciesProperty {
     pub dependencies: Vec<KconfigDependency>,
