@@ -1,6 +1,7 @@
 use crate::errors::parser_error::ParserError;
 use crate::parser::constants::{END_MENU_KEYWORD, MENU_KEYWORD, COMMENT_KEYWORD, IF_KEYWORD, SOURCE_KEYWORD, ENDIF_KEYWORD};
 use crate::parser::kconfig_parser_impl::parser_traits::{Parseable, ParsingContext};
+use crate::parser::kconfig_parser_impl::source_line_parser::parse_source_line;
 use crate::parser::utils::find_index_of_next_keyword_in_context::find_index_of_next_keyword_in_context;
 use crate::parser::utils::parse_span::ParseSpan;
 use crate::parser::utils::tokenizer::LineKConfigTokenizerIterator;
@@ -52,7 +53,12 @@ impl Parseable for KconfigNodeChildren {
                         node_children.add_children(KconfigNode::If(if_node));
                     },
                     COMMENT_KEYWORD => {},
-                    SOURCE_KEYWORD => {},
+                    SOURCE_KEYWORD => {
+                        let children_from_sourcing = parse_source_line(&context.get_line_context_with_span(
+                            &span.get_line_span_at(line_index),
+                        ))?;
+                        node_children.add_all_children(children_from_sourcing);
+                    },
                     _ => {}
                 }
             }

@@ -1,7 +1,9 @@
 use crate::parser::kconfig_parser_state::{Building, Done, KconfigParserState, Parsing};
 use std::marker::PhantomData;
 use std::path::Path;
+use crate::errors::parser_error::ParserError;
 use crate::parser::parser_config::ParserConfig;
+use crate::parser::utils::read_file_to_string::read_file_to_string;
 
 pub struct KconfigParser<State: KconfigParserState> {
     state: PhantomData<State>,
@@ -19,9 +21,9 @@ impl KconfigParser<Building> {
         }
     }
 
-    pub fn set_kconfig_path(mut self, path: &Path) -> Self {
-        //TODO: read kconfig path into top_kconfig_source
-        self
+    pub fn set_kconfig_path(mut self, path: &Path) -> Result<Self, ParserError> {
+        self.top_kconfig_source = read_file_to_string(path)?;
+        Ok(self)
     }
 
     // pub fn set_kconfig_source()

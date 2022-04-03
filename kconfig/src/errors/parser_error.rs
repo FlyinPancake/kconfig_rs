@@ -6,6 +6,12 @@ pub enum ParserError {
     #[error("syntax error:`{0}`")]
     Syntax(String),
 
+    #[error("sourcing was disabled, but encountered keyword anyway:`{0}`")]
+    EncounteredDisabledSource(String),
+
+    #[error("tried to read file:`{0}` but the operation failed")]
+    FileRead(String),
+
     #[error("internal parser error:`{0}`")]
     Internal(String),
 }
