@@ -4,6 +4,35 @@ use crate::parser::utils::get_line_indent::get_line_indent;
 use crate::parser::utils::parse_span::ParseSpan;
 use crate::structure::property::KconfigHelpProperty;
 
+/*
+
+	bool "TI Innovator"
+	depends on ARCH_OMAP1 && (ARCH_OMAP15XX || ARCH_OMAP16XX)
+	help
+          TI OMAP 1510 or 1610 Innovator board support. Say Y here if you
+          have such a board.
+
+config MACH_OMAP_H2
+	bool "TI H2 Support"
+	depends on ARCH_OMAP1 && ARCH_OMAP16XX
+    	help
+	  TI OMAP 1610/1611B H2 board support. Say Y here if you have such
+	  a board.
+
+config MACH_OMAP_H3
+	bool "TI H3 Support"
+	depends on ARCH_OMAP1 && ARCH_OMAP16XX
+    	help
+	  TI OMAP 1710 H3 board support. Say Y here if you have such
+	  a board.
+
+config asd
+    help
+config asd
+
+
+*/
+
 impl ParseableWithUnknownSpan for KconfigHelpProperty {
     fn parse_with_unknown_span<'c, 'p, 'a, 's, 'f>(
         context: &ParsingContext<'c, 'p, 'a, 's, 'f>,
@@ -12,7 +41,7 @@ impl ParseableWithUnknownSpan for KconfigHelpProperty {
         span.non_empty_or()?;
 
         let mut help_text = String::new();
-
+        let help_ident = get_line_indent(span.get_source_span()[0]);
         let mut last_line_index = 0;
         let mut to_match_indent = None;
 
@@ -21,6 +50,9 @@ impl ParseableWithUnknownSpan for KconfigHelpProperty {
             let ident = get_line_indent(line);
 
             if to_match_indent.is_none() && !line.is_empty()  {
+                if ident < help_ident && span.get_source_span()[line_index-1].is_empty() {
+                    break;
+                }
                 to_match_indent = Some(ident);
             }
 

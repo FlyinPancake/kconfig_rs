@@ -3,6 +3,7 @@ use std::path::Path;
 use crate::errors::parser_error::ParserError;
 use crate::parser::constants::SOURCE_KEYWORD;
 use crate::parser::kconfig_parser_impl::parser_traits::{LineParsingContext, Parseable, ParsingContext};
+use crate::parser::utils::collapse_manual_line_breaks::collapse_manual_line_breaks;
 use crate::parser::utils::parse_span::ParseSpan;
 use crate::parser::utils::strip_quotes::strip_quotes;
 use crate::parser::utils::substitute_variables_in_string::substitute_variables_in_string;
@@ -38,8 +39,12 @@ pub fn parse_source_line(context: &LineParsingContext) -> Result<KconfigNodeChil
 
     let source = read_to_string(source_final_path)
         .map_err(|err| ParserError::FileRead(format!("{}, {}", err, line_location_str)))?;
-    let file_contents = source
-        .lines()
+    let source_lines = collapse_manual_line_breaks(
+        source.lines().collect()
+    );
+    let file_contents = source_lines
+        .iter()
+        .map(|el| el.as_ref())
         .collect::<Vec<&str>>();
     let new_context = ParsingContext {
         config: context.config,

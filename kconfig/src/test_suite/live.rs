@@ -14,6 +14,7 @@ pub fn live() {
         .take_result().unwrap();
 
     // LMAO
-    println!("{:#?}", kconfig);
-    println!("Took {} ms", time.elapsed().as_millis())
+    let el = time.elapsed().as_millis();
+    let size = format!("{:?}", kconfig).len();
+    println!("Took {} ms, debug printed: {}", el, size)
 }

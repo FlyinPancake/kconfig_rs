@@ -14,13 +14,15 @@ pub mod kconfig_menu_config_node_parser;
 use crate::parser::kconfig_parser::KconfigParser;
 use crate::parser::kconfig_parser_impl::parser_traits::{Parseable, ParsingContext};
 use crate::parser::kconfig_parser_state::Parsing;
+use crate::parser::utils::collapse_manual_line_breaks::collapse_manual_line_breaks;
 use crate::parser::utils::parse_span::ParseSpan;
 use crate::structure::kconfig::Kconfig;
 use crate::structure::kconfig_node_children::KconfigNodeChildren;
 
 impl KconfigParser<Parsing> {
     pub fn parse(&mut self) {
-        let lines = self.top_kconfig_source.lines().collect::<Vec<&str>>();
+        let collapsed_lines = collapse_manual_line_breaks(self.top_kconfig_source.lines().collect());
+        let lines = collapsed_lines.iter().map(|el| el.as_ref()).collect::<Vec<&str>>();
         let span = ParseSpan::from_source(
             &lines[..],
             &self.top_kconfig_path,
