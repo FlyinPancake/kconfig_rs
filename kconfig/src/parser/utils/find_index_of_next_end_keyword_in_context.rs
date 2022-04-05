@@ -2,7 +2,7 @@ use crate::parser::kconfig_parser_impl::parser_traits::{ParseableWithUnknownSpan
 use crate::parser::utils::tokenizer::LineKConfigTokenizerIterator;
 use crate::structure::property::{is_keyword_help_keyword, KconfigHelpProperty};
 
-pub fn find_index_of_next_keyword_in_context(keyword: &str, context: &ParsingContext) -> Option<usize> {
+pub fn find_index_of_next_end_keyword_in_context(keyword: &str, end_keyword: &str, context: &ParsingContext) -> Option<usize> {
     let span = context.span;
     if span.non_empty_or().is_err() {
         return None;
@@ -10,6 +10,7 @@ pub fn find_index_of_next_keyword_in_context(keyword: &str, context: &ParsingCon
 
     let mut line_index = 0;
     let mut line = context.span.get_source_span()[0];
+    let mut keyword_count = 0;
 
     loop {
         let mut line_tokens = LineKConfigTokenizerIterator::from_line(line);
@@ -23,8 +24,13 @@ pub fn find_index_of_next_keyword_in_context(keyword: &str, context: &ParsingCon
                     ),
                 ).ok()?;
                 line_index += help_span.len() - 1;
+            } else if first_token == end_keyword {
+                keyword_count -= 1;
+                if keyword_count == 0 {
+                    return Some(line_index);
+                }
             } else if first_token == keyword {
-                return Some(line_index);
+                keyword_count += 1;
             }
         }
 
@@ -41,13 +47,15 @@ pub fn find_index_of_next_keyword_in_context(keyword: &str, context: &ParsingCon
 #[cfg(test)]
 mod test {
     use crate::parser::kconfig_parser_impl::parser_traits::ParsingContext;
-    use crate::parser::utils::find_index_of_next_keyword_in_context::find_index_of_next_keyword_in_context;
+    use crate::parser::utils::find_index_of_next_end_keyword_in_context::find_index_of_next_end_keyword_in_context;
     use crate::parser::utils::parse_span::ParseSpan;
 
     #[test]
     fn finds_next_menu_end() {
         let source = "menu\n\
         \tasdasdasd\n\
+        \tmenu\n\
+        \tendmenu\n\
         \thelp\n\
         \t\tendmenu lol\n\
         \t\tkeke sajt\n\
@@ -61,8 +69,8 @@ mod test {
         };
 
         assert_eq!(
-            find_index_of_next_keyword_in_context("endmenu", &context),
-            Some(5)
+            find_index_of_next_end_keyword_in_context("menu","endmenu", &context),
+            Some(7)
         );
     }
 }

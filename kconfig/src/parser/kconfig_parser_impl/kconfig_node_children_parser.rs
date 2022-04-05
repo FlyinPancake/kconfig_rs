@@ -2,7 +2,7 @@ use crate::errors::parser_error::ParserError;
 use crate::parser::constants::{END_MENU_KEYWORD, MENU_KEYWORD, COMMENT_KEYWORD, IF_KEYWORD, SOURCE_KEYWORD, ENDIF_KEYWORD, CONFIG_KEYWORD, MENU_CONFIG_KEYWORD, END_MENU_CONFIG_KEYWORD};
 use crate::parser::kconfig_parser_impl::parser_traits::{Parseable, ParseableWithUnknownSpan, ParsingContext};
 use crate::parser::kconfig_parser_impl::source_line_parser::parse_source_line;
-use crate::parser::utils::find_index_of_next_keyword_in_context::find_index_of_next_keyword_in_context;
+use crate::parser::utils::find_index_of_next_end_keyword_in_context::find_index_of_next_end_keyword_in_context;
 use crate::parser::utils::parse_span::ParseSpan;
 use crate::parser::utils::tokenizer::LineKConfigTokenizerIterator;
 use crate::structure::kconfig_node::KconfigNode;
@@ -11,11 +11,12 @@ use crate::structure::nodes::{KconfigConfigNode, KconfigIfNode, KconfigMenuConfi
 
 fn get_block_span<'a, 's, 'f>(
     context: &ParsingContext,
+    keyword: &str,
     end_keyword: &str,
     end_span: &ParseSpan<'a, 's, 'f>,
 ) -> Option<ParseSpan<'a, 's, 'f>> {
-    let end_at = find_index_of_next_keyword_in_context(end_keyword,
-        &context.with_different_span(
+    let end_at = find_index_of_next_end_keyword_in_context(keyword, end_keyword,
+                                                           &context.with_different_span(
             &end_span,
         ),
     )?;
@@ -36,7 +37,7 @@ impl Parseable for KconfigNodeChildren {
             if let Some(token) = tokens.next() {
                 match token {
                     MENU_KEYWORD => {
-                        let menu_span = get_block_span(context, END_MENU_KEYWORD, &span.get_with_start_at(line_index))
+                        let menu_span = get_block_span(context, MENU_KEYWORD, END_MENU_KEYWORD, &span.get_with_start_at(line_index))
                             .ok_or(ParserError::syntax_in_span_at("Expected a menu end keyword after a menu keyword.", &span, line_index))?;
                         let menu = KconfigMenuNode::parse(&context.with_different_span(
                             &menu_span,
@@ -46,7 +47,7 @@ impl Parseable for KconfigNodeChildren {
                         continue;
                     },
                     IF_KEYWORD => {
-                        let if_span = get_block_span(context, ENDIF_KEYWORD, &span.get_with_start_at(line_index))
+                        let if_span = get_block_span(context, IF_KEYWORD, ENDIF_KEYWORD, &span.get_with_start_at(line_index))
                             .ok_or(ParserError::syntax_in_span_at("Expected a if end keyword after an if keyword.", &span, line_index))?;
                         let if_node = KconfigIfNode::parse(&context.with_different_span(
                             &if_span,
@@ -72,7 +73,7 @@ impl Parseable for KconfigNodeChildren {
                         continue;
                     },
                     MENU_CONFIG_KEYWORD => {
-                        let menu_config_span = get_block_span(context, END_MENU_CONFIG_KEYWORD, &span.get_with_start_at(line_index))
+                        let menu_config_span = get_block_span(context, MENU_CONFIG_KEYWORD, END_MENU_CONFIG_KEYWORD, &span.get_with_start_at(line_index))
                             .ok_or(ParserError::syntax_in_span_at("Expected a menuconfig end keyword after a menuconfig keyword.", &span, line_index))?;
                         let menu_config = KconfigMenuConfigNode::parse(&context.with_different_span(
                             &menu_config_span,
