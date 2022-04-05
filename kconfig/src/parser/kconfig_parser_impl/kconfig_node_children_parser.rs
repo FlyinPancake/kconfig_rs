@@ -1,13 +1,13 @@
 use crate::errors::parser_error::ParserError;
-use crate::parser::constants::{END_MENU_KEYWORD, MENU_KEYWORD, COMMENT_KEYWORD, IF_KEYWORD, SOURCE_KEYWORD, ENDIF_KEYWORD};
-use crate::parser::kconfig_parser_impl::parser_traits::{Parseable, ParsingContext};
+use crate::parser::constants::{END_MENU_KEYWORD, MENU_KEYWORD, COMMENT_KEYWORD, IF_KEYWORD, SOURCE_KEYWORD, ENDIF_KEYWORD, CONFIG_KEYWORD, MENU_CONFIG_KEYWORD, END_MENU_CONFIG_KEYWORD};
+use crate::parser::kconfig_parser_impl::parser_traits::{Parseable, ParseableWithUnknownSpan, ParsingContext};
 use crate::parser::kconfig_parser_impl::source_line_parser::parse_source_line;
 use crate::parser::utils::find_index_of_next_keyword_in_context::find_index_of_next_keyword_in_context;
 use crate::parser::utils::parse_span::ParseSpan;
 use crate::parser::utils::tokenizer::LineKConfigTokenizerIterator;
 use crate::structure::kconfig_node::KconfigNode;
 use crate::structure::kconfig_node_children::KconfigNodeChildren;
-use crate::structure::nodes::{KconfigIfNode, KconfigMenuNode};
+use crate::structure::nodes::{KconfigConfigNode, KconfigIfNode, KconfigMenuConfigNode, KconfigMenuNode};
 
 fn get_block_span<'a, 's, 'f>(
     context: &ParsingContext,
@@ -28,7 +28,8 @@ impl Parseable for KconfigNodeChildren {
         let span = context.span;
         let mut node_children = KconfigNodeChildren::new_empty();
 
-        for line_index in 0..span.len() {
+        let mut line_index = 0;
+        while line_index < span.len() {
             let line = &span.get_source_span()[line_index];
             let mut tokens = LineKConfigTokenizerIterator::from_line(line);
 
@@ -40,17 +41,19 @@ impl Parseable for KconfigNodeChildren {
                         let menu = KconfigMenuNode::parse(&context.with_different_span(
                             &menu_span,
                         ))?;
-
+                        line_index += menu_span.len();
                         node_children.add_children(KconfigNode::Menu(menu));
-                    }
+                        continue;
+                    },
                     IF_KEYWORD => {
                         let if_span = get_block_span(context, ENDIF_KEYWORD, &span.get_with_start_at(line_index))
                             .ok_or(ParserError::syntax("Expected a if end keyword after a menu keyword."))?;
                         let if_node = KconfigIfNode::parse(&context.with_different_span(
                             &if_span,
                         ))?;
-
+                        line_index += if_span.len();
                         node_children.add_children(KconfigNode::If(if_node));
+                        continue;
                     },
                     COMMENT_KEYWORD => {},
                     SOURCE_KEYWORD => {
@@ -59,9 +62,30 @@ impl Parseable for KconfigNodeChildren {
                         ))?;
                         node_children.add_all_children(children_from_sourcing);
                     },
+                    CONFIG_KEYWORD => {
+                        let config_potential_span = span.get_with_start_at(line_index);
+                        let (config, config_span) = KconfigConfigNode::parse_with_unknown_span(
+                            &context.with_different_span(&config_potential_span),
+                        )?;
+                        line_index += config_span.len();
+                        node_children.add_children(KconfigNode::Config(config));
+                        continue;
+                    },
+                    MENU_CONFIG_KEYWORD => {
+                        let menu_config_span = get_block_span(context, END_MENU_CONFIG_KEYWORD, &span.get_with_start_at(line_index))
+                            .ok_or(ParserError::syntax("Expected a menuconfig end keyword after a menuconfig keyword."))?;
+                        let menu_config = KconfigMenuConfigNode::parse(&context.with_different_span(
+                            &menu_config_span,
+                        ))?;
+                        line_index += menu_config_span.len();
+                        node_children.add_children(KconfigNode::MenuConfig(menu_config));
+                        continue;
+                    },
                     _ => {}
                 }
             }
+
+            line_index += 1;
         }
 
         Ok(node_children)

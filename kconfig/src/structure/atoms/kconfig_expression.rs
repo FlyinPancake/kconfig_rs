@@ -1,6 +1,6 @@
 use crate::structure::atoms::kconfig_symbol::KconfigSymbol;
 
-#[derive(Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq)]
 pub struct KconfigExpression {
     pub source: String,
     // pub included_symbols: Vec<KconfigSymbol>,

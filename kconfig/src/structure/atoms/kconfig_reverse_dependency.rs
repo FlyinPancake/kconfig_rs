@@ -1,6 +1,7 @@
 use crate::structure::atoms::kconfig_expression::KconfigExpression;
+use crate::structure::atoms::KconfigSymbol;
 
 pub struct KconfigReverseDependency {
-    pub expression: KconfigExpression,
+    pub on_symbol: KconfigSymbol,
     pub if_constraint: Option<KconfigExpression>,
 }

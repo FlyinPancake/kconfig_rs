@@ -7,6 +7,9 @@ pub mod kconfig_if_node_parser;
 pub mod source_line_parser;
 pub mod kconfig_config_parser;
 pub mod kconfig_config_node_parser;
+pub mod kconfig_type_property_parser;
+pub mod kconfig_reverse_dependency_parser;
+pub mod kconfig_menu_config_node_parser;
 
 use crate::parser::kconfig_parser::KconfigParser;
 use crate::parser::kconfig_parser_state::Parsing;
