@@ -19,6 +19,7 @@ impl KconfigExpression {
         }
         rip_string
             .split_whitespace()
+            .filter(|el| !el.starts_with('$'))
             .map(|s| KconfigSymbol {
                 name: s.to_string(),
             })

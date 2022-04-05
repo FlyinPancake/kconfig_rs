@@ -1,4 +1,3 @@
-use std::collections::HashMap;
 use crate::parser::kconfig_parser_state::{Building, Done, KconfigParserState, Parsing};
 use std::marker::PhantomData;
 use std::path::Path;
@@ -17,8 +16,6 @@ pub struct KconfigParser<State: KconfigParserState> {
     pub(crate) config: ParserConfig,
 
     pub(crate) result: Option<Result<Kconfig, ParserError>>,
-
-    pub(crate) variables: HashMap<String, String>,
 }
 
 impl KconfigParser<Building> {
@@ -47,6 +44,12 @@ impl KconfigParser<Building> {
 
     pub fn allow_sourcing(mut self, allow: bool) -> Self {
         self.config.can_source = allow;
+
+        self
+    }
+
+    pub fn set_variable(mut self, variable: &str, value: &str) -> Self {
+        self.config.variables.insert(variable.to_string(), value.to_string());
 
         self
     }
