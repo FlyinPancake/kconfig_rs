@@ -37,6 +37,7 @@ impl ParseableWithUnknownSpan for KconfigConfig {
             let mut line_tokens = LineKConfigTokenizerIterator::from_line(line);
             if let Some(first_token) = line_tokens.next() {
                 if is_non_config_keyword(first_token) {
+                    line_index -= 1;
                     break;
                 }
                 if get_type_keyword_from_token(first_token).is_some() {
