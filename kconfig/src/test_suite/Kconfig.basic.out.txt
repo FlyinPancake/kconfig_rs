@@ -1,0 +1,2592 @@
+Kconfig {
+    children: KconfigNodeChildren {
+        children: [
+            Menu(
+                KconfigMenuNode {
+                    name: "\"General architecture-dependent options\"",
+                    dependencies: KconfigDependenciesProperty {
+                        dependencies: [],
+                    },
+                    children: KconfigNodeChildren {
+                        children: [
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "CRASH_CORE",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "KEXEC_ELF",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HOTPLUG_SMT",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "KPROBES",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "MODULES",
+                                                    },
+                                                },
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "HAVE_KPROBES",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [
+                                                KconfigReverseDependency {
+                                                    on_symbol: KconfigSymbol {
+                                                        name: "KALLSYMS",
+                                                    },
+                                                    if_constraint: None,
+                                                },
+                                            ],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Kprobes allows you to trap at almost any kernel address and\nexecute a callback function.  register_kprobe() establishes\na probepoint and specifies the callback.  Kprobes is useful\nfor kernel debugging, non-intrusive instrumentation and testing.\nIf in doubt, say \"N\".",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "STATIC_KEYS_SELFTEST",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "JUMP_LABEL",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Boot time self-test of the branch patching code.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "OPTPROBES",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: None,
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "KPROBES && HAVE_OPTPROBES",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [
+                                                KconfigReverseDependency {
+                                                    on_symbol: KconfigSymbol {
+                                                        name: "TASKS_RCU",
+                                                    },
+                                                    if_constraint: Some(
+                                                        KconfigExpression {
+                                                            source: "PREEMPTION",
+                                                        },
+                                                    ),
+                                                },
+                                            ],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "UPROBES",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: None,
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "ARCH_SUPPORTS_UPROBES",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Uprobes is the user-space counterpart to kprobes: they\nenable instrumentation applications (such as 'perf probe')\nto establish unintrusive probes in user-space binaries and\nlibraries, by executing handler functions when the probes\nare hit by user-space applications.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_EFFICIENT_UNALIGNED_ACCESS",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Some architectures are unable to perform unaligned accesses\nwithout the use of get_unaligned/put_unaligned. Others are\nunable to perform such accesses efficiently (e.g. trap on\nunaligned access and require fixing it up in the exception\nhandler.)",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "KRETPROBES",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: None,
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "KPROBES && (HAVE_KRETPROBES || HAVE_RETHOOK)",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "USER_RETURN_NOTIFIER",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "HAVE_USER_RETURN_NOTIFIER",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Provide a kernel-internal notification when a cpu is about to\nswitch to user mode.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_KPROBES",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_OPTPROBES",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_CORRECT_STACKTRACE_ON_KRETPROBE",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Since kretprobes modifies return address on the stack, the\nstacktrace may see the kretprobe trampoline address instead\nof correct one. If the architecture stacktrace code and\nunwinder can adjust such entries, select this configuration.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_NMI",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "TRACE_IRQFLAGS_SUPPORT",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_DMA_CONTIGUOUS",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "GENERIC_IDLE_POLL_SETUP",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_HAS_KEEPINITRD",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_HAS_SET_DIRECT_MAP",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_HAS_DMA_CLEAR_UNCACHED",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_TASK_STRUCT_ALLOCATOR",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_THREAD_STACK_ALLOCATOR",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_WANTS_NO_INSTR",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "An architecture should select this if the noinstr macro is being used on\nfunctions to denote that the toolchain should avoid instrumenting such\nfunctions and is required for correctness.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_32BIT_USTAT_F_TINODE",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_REGS_AND_STACK_ACCESS_API",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "This symbol should be selected by an architecture if it supports\nthe API needed to access registers and stack entries from pt_regs,\ndeclared in asm/ptrace.h\nFor example the kprobes-based event tracer needs this API.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_FUNCTION_ARG_ACCESS_API",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "This symbol should be selected by an architecture if it supports\nthe API needed to access function arguments from pt_regs,\ndeclared in asm/ptrace.h",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_MIXED_BREAKPOINTS_REGS",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "HAVE_HW_BREAKPOINT",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Depending on the arch implementation of hardware breakpoints,\nsome of them have separate registers for data and instruction\nbreakpoints addresses, others have mixed registers to store\nthem but define the access type in a control register.\nSelect this option if your arch implements breakpoints under the\nlatter fashion.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_PERF_EVENTS_NMI",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "System hardware can generate an NMI using the perf event\nsubsystem.  Also has support for calculating CPU cycle events\nto determine how many clock cycles in a given period.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_NMI_WATCHDOG",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "HAVE_NMI",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "The arch provides a low level NMI watchdog. It provides\nasm/nmi.h, and defines its own arch_touch_nmi_watchdog().",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_PERF_REGS",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Support selective register dumps for perf events. This includes\nbit-mapping of each registers and a unique architecture id.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_ARCH_JUMP_LABEL",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "MMU_GATHER_TABLE_FREE",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "MMU_GATHER_PAGE_SIZE",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "MMU_GATHER_NO_GATHER",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "MMU_GATHER_TABLE_FREE",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_HAVE_NMI_SAFE_CMPXCHG",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_CMPXCHG_LOCAL",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_WEAK_RELEASE_ACQUIRE",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_WANT_COMPAT_IPC_PARSE_VERSION",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_ARCH_SECCOMP",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "An arch should select this symbol to support seccomp mode 1 (the fixed\nsyscall policy), and must provide an overrides for __NR_seccomp_sigreturn,\nand compat syscalls if the asm-generic/seccomp.h defaults need adjustment:\n- __NR_seccomp_read_32\n- __NR_seccomp_write_32\n- __NR_seccomp_exit_32\n- __NR_seccomp_sigreturn_32",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "SECCOMP",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: None,
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "HAVE_ARCH_SECCOMP",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "This kernel feature is useful for number crunching applications\nthat may need to handle untrusted bytecode during their\nexecution. By using pipes or other transports made available\nto the process as file descriptors supporting the read/write\nsyscalls, it's possible to isolate those applications in their\nown address space using seccomp. Once seccomp is enabled via\nprctl(PR_SET_SECCOMP) or the seccomp() syscall, it cannot be\ndisabled and the task is only allowed to execute a few safe\nsyscalls defined by each seccomp mode.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "SECCOMP_CACHE_DEBUG",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "SECCOMP_FILTER && !HAVE_SPARSE_SYSCALL_NR",
+                                                    },
+                                                },
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "PROC_FS",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "This enables the /proc/pid/seccomp_cache interface to monitor\nseccomp cache data. The file format is subject to change. Reading\nthe file requires CAP_SYS_ADMIN.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_STACKPROTECTOR",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "An arch should select this symbol if:\n- it has implemented a stack canary (e.g. __stack_chk_guard)",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "STACKPROTECTOR_STRONG",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "STACKPROTECTOR",
+                                                    },
+                                                },
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "$(cc-option,-fstack-protector-strong)",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Functions will have the stack-protector canary logic added in any\nof the following conditions:",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "SHADOW_CALL_STACK",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "ARCH_SUPPORTS_SHADOW_CALL_STACK",
+                                                    },
+                                                },
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "DYNAMIC_FTRACE_WITH_REGS || !FUNCTION_GRAPH_TRACER",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "This option enables the compiler's Shadow Call Stack, which\nuses a shadow stack to protect function return addresses from\nbeing overwritten by an attacker. More information can be found\nin the compiler's documentation:",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "LTO_CLANG",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [
+                                                KconfigReverseDependency {
+                                                    on_symbol: KconfigSymbol {
+                                                        name: "LTO",
+                                                    },
+                                                    if_constraint: None,
+                                                },
+                                            ],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Selected if the kernel will be built using Clang's LTO feature.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_SUPPORTS_LTO_CLANG_THIN",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "An architecture should select this option if it can support Clang's\nThinLTO mode.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "LTO_NONE",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Build the kernel normally, without Link Time Optimization (LTO).",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "LTO_CLANG_THIN",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "HAS_LTO_CLANG && ARCH_SUPPORTS_LTO_CLANG_THIN",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [
+                                                KconfigReverseDependency {
+                                                    on_symbol: KconfigSymbol {
+                                                        name: "LTO_CLANG",
+                                                    },
+                                                    if_constraint: None,
+                                                },
+                                            ],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "This option enables Clang's ThinLTO, which allows for parallel\noptimization and faster incremental compiles compared to the\nCONFIG_LTO_CLANG_FULL option. More information can be found\nfrom Clang's documentation:",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "CFI_CLANG",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "LTO_CLANG && ARCH_SUPPORTS_CFI_CLANG",
+                                                    },
+                                                },
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "CLANG_VERSION >= 120000",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [
+                                                KconfigReverseDependency {
+                                                    on_symbol: KconfigSymbol {
+                                                        name: "KALLSYMS",
+                                                    },
+                                                    if_constraint: None,
+                                                },
+                                            ],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "This option enables Clang’s forward-edge Control Flow Integrity\n(CFI) checking, where the compiler injects a runtime check to each\nindirect function call to ensure the target is a valid function with\nthe correct static type. This restricts possible call targets and\nmakes it more difficult for an attacker to exploit bugs that allow\nthe modification of stored function pointers. More information can be\nfound from Clang's documentation:",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "CFI_PERMISSIVE",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "CFI_CLANG",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "When selected, Control Flow Integrity (CFI) violations result in a\nwarning instead of a kernel panic. This option should only be used\nfor finding indirect call type mismatches during development.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_CONTEXT_TRACKING",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Provide kernel/user boundaries probes necessary for subsystems\nthat need it, such as userspace RCU extended quiescent state.\nSyscalls need to be wrapped inside user_exit()-user_enter(), either\noptimized behind static key or through the slow path using TIF_NOHZ\nflag. Exceptions handlers must be wrapped as well. Irqs are already\nprotected inside rcu_irq_enter/rcu_irq_exit() but preemption or signal\nhandling on irq exit still need to be protected.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_TIF_NOHZ",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Arch relies on TIF_NOHZ and syscall slow path to implement context\ntracking calls to user_enter()/user_exit().",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_VIRT_CPU_ACCOUNTING_IDLE",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Architecture has its own way to account idle CPU time and therefore\ndoesn't implement vtime_account_idle().",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_VIRT_CPU_ACCOUNTING_GEN",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "With VIRT_CPU_ACCOUNTING_GEN, cputime_t becomes 64-bit.\nBefore enabling this option, arch code must be audited\nto ensure there are no races in concurrent read/write of\ncputime_t. For example, reading/writing 64-bit cputime_t on\nsome 32-bit arches may require multiple accesses, so proper\nlocking is needed to protect against concurrent accesses.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_MOVE_PUD",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Architectures that select this are able to move page tables at the\nPUD level. If there are only 3 page table levels, the move effectively\nhappens at the PGD level.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_ARCH_TRANSPARENT_HUGEPAGE",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_ARCH_HUGE_VMAP",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_WANT_HUGE_PMD_SHARE",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_MOD_ARCH_SPECIFIC",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "The arch uses struct mod_arch_specific to store data.  Many arches\njust need a simple module loader without arch specific data - those\nshould not enable this.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "MODULES_USE_ELF_REL",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Modules only use ELF REL relocations.  Modules with ELF RELA\nrelocations will give an error.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_SOFTIRQ_ON_OWN_STACK",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Architecture provides a function to run __do_softirq() on a\nseparate stack.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "PGTABLE_LEVELS",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Int,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_ARCH_MMAP_RND_BITS",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "An arch should select this symbol if it supports setting a variable\nnumber of bits for use in establishing the base address for mmap\nallocations, has MMU enabled and provides values for both:\n- ARCH_MMAP_RND_BITS_MIN\n- ARCH_MMAP_RND_BITS_MAX",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_MMAP_RND_BITS_MIN",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Int,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_MMAP_RND_BITS_DEFAULT",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Int,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_ARCH_MMAP_RND_COMPAT_BITS",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "An arch should select this symbol if it supports running applications\nin compatibility mode, supports setting a variable number of bits for\nuse in establishing the base address for mmap allocations, has MMU\nenabled and provides values for both:\n- ARCH_MMAP_RND_COMPAT_BITS_MIN\n- ARCH_MMAP_RND_COMPAT_BITS_MAX",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_MMAP_RND_COMPAT_BITS_MAX",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Int,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_MMAP_RND_COMPAT_BITS",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Int,
+                                                if_dep_on_type: Some(
+                                                    KconfigDependency {
+                                                        expression: KconfigExpression {
+                                                            source: "EXPERT",
+                                                        },
+                                                    },
+                                                ),
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "EXPERT",
+                                                    },
+                                                },
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "HAVE_ARCH_MMAP_RND_COMPAT_BITS",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "This value can be used to select the number of bits to use to\ndetermine the random offset to the base address of vma regions\nresulting from mmap allocations for compatible applications This\nvalue will be bounded by the architecture's minimum and maximum\nsupported values.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "PAGE_SIZE_LESS_THAN_64KB",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: None,
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "!ARM64_64K_PAGES",
+                                                    },
+                                                },
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "!IA64_PAGE_SIZE_64KB",
+                                                    },
+                                                },
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "!PAGE_SIZE_64KB",
+                                                    },
+                                                },
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "!PARISC_PAGE_SIZE_64KB",
+                                                    },
+                                                },
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "!PPC_64K_PAGES",
+                                                    },
+                                                },
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "PAGE_SIZE_LESS_THAN_256KB",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_WANT_DEFAULT_TOPDOWN_MMAP_LAYOUT",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "MMU",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [
+                                                KconfigReverseDependency {
+                                                    on_symbol: KconfigSymbol {
+                                                        name: "ARCH_HAS_ELF_RANDOMIZE",
+                                                    },
+                                                    if_constraint: None,
+                                                },
+                                            ],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_RELIABLE_STACKTRACE",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Architecture has either save_stack_trace_tsk_reliable() or\narch_stack_walk_reliable() function which only returns a stack trace\nif it can guarantee the trace is reliable.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_ARCH_NVRAM_OPS",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "CLONE_BACKWARDS",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Architecture has tls passed as the 4th argument of clone(2),\nnot the 5th one.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "CLONE_BACKWARDS3",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Architecture has tls passed as the 3rd argument of clone(2),\nnot the 5th one.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "OLD_SIGSUSPEND",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Architecture has old sigsuspend(2) syscall, of one-argument variety",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "OLD_SIGACTION",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Architecture has old sigaction(2) syscall.  Nope, not the same\nas OLD_SIGSUSPEND | OLD_SIGSUSPEND3 - alpha has sigsuspend(2),\nbut fairly different variant of sigaction(2), thanks to OSF/1\ncompatibility...",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "COMPAT_32BIT_TIME",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "This enables 32 bit time_t support in addition to 64 bit time_t support.\nThis is relevant on all 32-bit architectures, and 64-bit architectures\nas part of compat syscall handling.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_EPHEMERAL_INODES",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: None,
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "An arch should select this symbol if it doesn't keep track of inode\ninstances on its own, but instead relies on something else (e.g. the\nhost kernel for an UML kernel).",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "CPU_NO_EFFICIENT_FFS",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: None,
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "VMAP_STACK",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "HAVE_ARCH_VMAP_STACK",
+                                                    },
+                                                },
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "!KASAN || KASAN_HW_TAGS || KASAN_VMALLOC",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Enable this if you want the use virtually-mapped kernel stacks\nwith guard pages.  This causes kernel stack overflows to be\ncaught immediately rather than causing difficult-to-diagnose\ncorruption.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "RANDOMIZE_KSTACK_OFFSET",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: Some(
+                                                    KconfigDependency {
+                                                        expression: KconfigExpression {
+                                                            source: "EXPERT",
+                                                        },
+                                                    },
+                                                ),
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "EXPERT",
+                                                    },
+                                                },
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "HAVE_ARCH_RANDOMIZE_KSTACK_OFFSET",
+                                                    },
+                                                },
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "INIT_STACK_NONE || !CC_IS_CLANG || CLANG_VERSION >= 140000",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "The kernel stack offset can be randomized (after pt_regs) by\nroughly 5 bits of entropy, frustrating memory corruption\nattacks that depend on stack address determinism or\ncross-syscall address exposures.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_OPTIONAL_KERNEL_RWX",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: None,
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_HAS_STRICT_KERNEL_RWX",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: None,
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_HAS_STRICT_MODULE_RWX",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: None,
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_HAS_PHYS_TO_DMA",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_ARCH_PREL32_RELOCATIONS",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "May be selected by an architecture if it supports place-relative\n32-bit relocations, both in the toolchain and in the module loader,\nin which case relative references can be used in special sections\nfor PCI fixup, initcalls etc which are only half the size on 64 bit\narchitectures, and don't require runtime relocation on relocatable\nkernels.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "LOCK_EVENT_COUNTS",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "DEBUG_FS",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Enable light-weight counting of various locking related events\nin the system with minimal performance impact. This reduces\nthe chance of application behavior change because of timing\ndifferences. The counts are reported via debugfs.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "RELR",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "ARCH_HAS_RELR && TOOLS_SUPPORT_RELR",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "Store the kernel's dynamic relocations in the RELR relocation packing\nformat. Requires a compatible linker (LLD supports this feature), as\nwell as compatible NM and OBJCOPY utilities (llvm-nm and llvm-objcopy\nare compatible).",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_HAS_CC_PLATFORM",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_HAS_VDSO_DATA",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_STATIC_CALL_INLINE",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "HAVE_STATIC_CALL",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_PREEMPT_DYNAMIC_CALL",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [
+                                                KconfigDependency {
+                                                    expression: KconfigExpression {
+                                                        source: "HAVE_STATIC_CALL",
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [
+                                                KconfigReverseDependency {
+                                                    on_symbol: KconfigSymbol {
+                                                        name: "HAVE_PREEMPT_DYNAMIC",
+                                                    },
+                                                    if_constraint: None,
+                                                },
+                                            ],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "An architecture should select this if it can handle the preemption\nmodel being selected at boot time using static calls.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_WANT_LD_ORPHAN_WARN",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "An arch should select this symbol once all linker sections are explicitly\nincluded, size-asserted, or discarded in the linker scripts. This is\nimportant because we never want expected sections to be placed heuristically\nby the linker, since the locations of such sections can change between linker\nversions.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_SUPPORTS_DEBUG_PAGEALLOC",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_SPLIT_ARG64",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: Some(
+                                            KconfigHelpProperty {
+                                                help_text: "If a 32-bit architecture requires 64-bit arguments to be split into\npairs of 32-bit arguments, select this option.",
+                                            },
+                                        ),
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "ARCH_HAS_PARANOID_L1D_FLUSH",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                            Config(
+                                KconfigConfigNode {
+                                    symbol: KconfigSymbol {
+                                        name: "HAVE_ARCH_NODE_DEV_GROUP",
+                                    },
+                                    config: KconfigConfig {
+                                        type_property: Some(
+                                            KconfigTypeProperty {
+                                                config_type: Bool,
+                                                if_dep_on_type: None,
+                                            },
+                                        ),
+                                        dependencies: KconfigDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        reverse_dependencies: KconfigReverseDependenciesProperty {
+                                            dependencies: [],
+                                        },
+                                        help_property: None,
+                                    },
+                                },
+                            ),
+                        ],
+                    },
+                },
+            ),
+        ],
+    },
+}
+

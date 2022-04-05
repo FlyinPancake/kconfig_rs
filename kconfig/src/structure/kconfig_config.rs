@@ -1,5 +1,6 @@
 use crate::structure::property::{KconfigDependenciesProperty, KconfigHelpProperty, KconfigReverseDependenciesProperty, KconfigTypeProperty};
 
+#[derive(Debug, Clone)]
 pub struct KconfigConfig {
     pub type_property: Option<KconfigTypeProperty>,
     pub dependencies: KconfigDependenciesProperty,

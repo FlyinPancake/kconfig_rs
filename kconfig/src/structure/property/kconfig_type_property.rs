@@ -7,7 +7,7 @@ pub use crate::parser::constants::{
 };
 use crate::structure::atoms::KconfigDependency;
 
-#[derive(Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub enum ConfigType {
     Bool,
     Tristate,
@@ -16,6 +16,7 @@ pub enum ConfigType {
     Int
 }
 
+#[derive(Debug, Clone)]
 pub struct KconfigTypeProperty {
     pub config_type: ConfigType,
 

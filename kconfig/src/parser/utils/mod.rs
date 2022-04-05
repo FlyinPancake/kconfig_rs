@@ -4,6 +4,7 @@ pub mod parse_span;
 pub mod tokenizer;
 pub mod read_file_to_string;
 pub mod parse_node_header_and_get_name;
+pub mod get_string_from_path;
 
 #[cfg(test)]
 mod tokenizer_test;

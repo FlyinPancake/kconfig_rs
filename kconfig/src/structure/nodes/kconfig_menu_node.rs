@@ -1,10 +1,11 @@
 use crate::structure::kconfig_node_children::KconfigNodeChildren;
 use crate::structure::property::KconfigDependenciesProperty;
 
+#[derive(Debug, Clone)]
 pub struct KconfigMenuNode {
     pub name: String,
     pub dependencies: KconfigDependenciesProperty,
-    pub(crate) children: KconfigNodeChildren,
+    pub children: KconfigNodeChildren,
 }
 
 impl KconfigMenuNode {

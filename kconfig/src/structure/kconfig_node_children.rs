@@ -1,7 +1,8 @@
 use crate::structure::kconfig_node::KconfigNode;
 
+#[derive(Debug, Clone)]
 pub struct KconfigNodeChildren {
-    children: Vec<KconfigNode>,
+    pub children: Vec<KconfigNode>,
 }
 
 impl KconfigNodeChildren {

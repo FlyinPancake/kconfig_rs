@@ -1,5 +1,6 @@
 use crate::parser::constants::{HELP_DASHED_KEYWORD, HELP_KEYWORD};
 
+#[derive(Debug, Clone)]
 pub struct KconfigHelpProperty {
     pub help_text: String,
 }

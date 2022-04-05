@@ -9,6 +9,9 @@ pub mod structure;
 pub mod test_utils;
 
 #[cfg(test)]
+pub mod test_suite;
+
+#[cfg(test)]
 mod tests {
     #[test]
     fn it_works() {

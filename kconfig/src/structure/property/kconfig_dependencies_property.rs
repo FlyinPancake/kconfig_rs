@@ -1,5 +1,6 @@
 use crate::structure::atoms::KconfigDependency;
 
+#[derive(Debug, Clone)]
 pub struct KconfigDependenciesProperty {
     pub dependencies: Vec<KconfigDependency>,
 }
