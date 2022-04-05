@@ -22,7 +22,7 @@ impl KconfigParser<Building> {
     pub fn new() -> Self {
         KconfigParser {
             state: Default::default(),
-            top_kconfig_path: "<unknown>".to_string(),
+            top_kconfig_path: ".".to_string(),
             top_kconfig_source: "".to_string(),
             config: Default::default(),
             result: None,
@@ -36,7 +36,7 @@ impl KconfigParser<Building> {
     }
 
     pub fn set_kconfig_source(mut self, source: String) -> Self {
-        self.top_kconfig_path = "<unknown>".to_string();
+        self.top_kconfig_path = ".".to_string();
         self.top_kconfig_source = source;
 
         self
@@ -63,6 +63,7 @@ impl KconfigParser<Building> {
             result: None,
         };
 
+        parsing_parser.config.root_path = parsing_parser.top_kconfig_path.clone();
         parsing_parser.parse();
 
         KconfigParser {

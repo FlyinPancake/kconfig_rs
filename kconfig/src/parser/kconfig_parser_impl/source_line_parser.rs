@@ -29,7 +29,12 @@ pub fn parse_source_line(context: &LineParsingContext) -> Result<KconfigNodeChil
         source_path_raw,
     );
 
-    let source = read_to_string(Path::new(&source_path_compiled))
+    let source = read_to_string(
+        Path::new(&context.config.root_path)
+            .parent()
+            .unwrap_or(Path::new("./"))
+            .join(Path::new(&source_path_compiled))
+    )
         .map_err(|err| ParserError::FileRead(format!("{}, {}", err, line_location_str)))?;
     let file_contents = source
         .lines()
