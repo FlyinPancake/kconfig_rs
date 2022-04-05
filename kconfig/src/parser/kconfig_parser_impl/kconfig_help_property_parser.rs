@@ -10,6 +10,7 @@ impl ParseableWithUnknownSpan for KconfigHelpProperty {
     ) -> Result<(Self, ParseSpan<'a, 's, 'f>), ParserError> {
         let span = context.span;
         span.non_empty_or()?;
+
         let mut help_text = String::new();
 
         let mut last_line_index = 0;
@@ -19,11 +20,11 @@ impl ParseableWithUnknownSpan for KconfigHelpProperty {
             let line = span.get_source_span()[line_index];
             let ident = get_line_indent(line);
 
-            if to_match_indent.is_none() {
+            if to_match_indent.is_none() && !line.is_empty()  {
                 to_match_indent = Some(ident);
             }
 
-            if ident < to_match_indent.unwrap_or(0) {
+            if ident < to_match_indent.unwrap_or(0) && !line.is_empty() {
                 break;
             }
 

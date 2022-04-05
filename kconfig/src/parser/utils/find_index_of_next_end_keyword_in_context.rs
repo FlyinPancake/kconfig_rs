@@ -23,6 +23,7 @@ pub fn find_index_of_next_end_keyword_in_context(keyword: &str, end_keyword: &st
                         &help_max_span,
                     ),
                 ).ok()?;
+
                 line_index += help_span.len() - 1;
             } else if first_token == end_keyword {
                 keyword_count -= 1;

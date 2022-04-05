@@ -1,11 +1,11 @@
 use crate::errors::parser_error::ParserError;
-use crate::parser::constants::{DEPENDS_KEYWORD, HELP_KEYWORD, NON_CONFIG_KEYWORDS, SELECT_KEYWORD, TYPE_KEYWORDS};
+use crate::parser::constants::{DEPENDS_KEYWORD, NON_CONFIG_KEYWORDS, SELECT_KEYWORD, TYPE_KEYWORDS};
 use crate::parser::kconfig_parser_impl::parser_traits::{ParseableFromLine, ParseableWithUnknownSpan, ParsingContext};
 use crate::parser::utils::parse_span::{ParseSpan};
 use crate::parser::utils::tokenizer::LineKConfigTokenizerIterator;
 use crate::structure::atoms::{KconfigDependency, KconfigReverseDependency};
 use crate::structure::kconfig_config::KconfigConfig;
-use crate::structure::property::{KconfigHelpProperty, KconfigTypeProperty};
+use crate::structure::property::{is_keyword_help_keyword, KconfigHelpProperty, KconfigTypeProperty};
 
 fn is_non_config_keyword(
     keyword: &str,
@@ -70,7 +70,7 @@ impl ParseableWithUnknownSpan for KconfigConfig {
                     config.reverse_dependencies.add_reverse_dependency(rev_dep);
                 }
 
-                if first_token == HELP_KEYWORD {
+                if is_keyword_help_keyword(first_token) {
                     let (help, help_span) = KconfigHelpProperty::parse_with_unknown_span(
                         &context.with_different_span(&context.span.get_with_start_at(line_index)),
                     )?;

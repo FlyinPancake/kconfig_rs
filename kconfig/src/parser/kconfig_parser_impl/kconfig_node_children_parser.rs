@@ -68,6 +68,7 @@ impl Parseable for KconfigNodeChildren {
                         let (config, config_span) = KconfigConfigNode::parse_with_unknown_span(
                             &context.with_different_span(&config_potential_span),
                         )?;
+
                         line_index += config_span.len();
                         node_children.add_children(KconfigNode::Config(config));
                         continue;
