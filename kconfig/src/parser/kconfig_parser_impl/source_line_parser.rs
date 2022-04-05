@@ -4,6 +4,7 @@ use crate::errors::parser_error::ParserError;
 use crate::parser::constants::SOURCE_KEYWORD;
 use crate::parser::kconfig_parser_impl::parser_traits::{LineParsingContext, Parseable, ParsingContext};
 use crate::parser::utils::parse_span::ParseSpan;
+use crate::parser::utils::strip_quotes::strip_quotes;
 use crate::parser::utils::substitute_variables_in_string::substitute_variables_in_string;
 use crate::parser::utils::tokenizer::LineKConfigTokenizerIterator;
 use crate::structure::kconfig_node_children::KconfigNodeChildren;
@@ -21,20 +22,21 @@ pub fn parse_source_line(context: &LineParsingContext) -> Result<KconfigNodeChil
         return Err(ParserError::EncounteredDisabledSource(line_location_str));
     }
 
-    let source_path_raw = tokens.next()
-        .ok_or(ParserError::syntax_in_line_span("Expected source path", line))?;
+    let source_path_raw = strip_quotes(&tokens.next()
+        .ok_or(ParserError::syntax_in_line_span("Expected source path", line))?);
 
     let source_path_compiled = substitute_variables_in_string(
         &context.config,
-        source_path_raw,
+        &source_path_raw,
     );
 
-    let source = read_to_string(
+    let source_final_path =
         Path::new(&context.config.root_path)
             .parent()
             .unwrap_or(Path::new("./"))
-            .join(Path::new(&source_path_compiled))
-    )
+            .join(Path::new(&source_path_compiled));
+
+    let source = read_to_string(source_final_path)
         .map_err(|err| ParserError::FileRead(format!("{}, {}", err, line_location_str)))?;
     let file_contents = source
         .lines()
