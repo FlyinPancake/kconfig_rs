@@ -19,7 +19,6 @@ pub const SOURCE_KEYWORD: &'static str = "source";
 pub const CONFIG_KEYWORD: &'static str = "config";
 
 pub const MENU_CONFIG_KEYWORD: &'static str = "menuconfig";
-pub const END_MENU_CONFIG_KEYWORD: &'static str = "endmenuconfig";
 
 // Types
 pub const BOOL_KEYWORD: &'static str = "bool";
@@ -36,7 +35,7 @@ pub const TYPE_KEYWORDS: [&'static str; 5] = [
     INT_KEYWORD,
 ];
 
-pub const NON_CONFIG_KEYWORDS: [&'static str; 8] = [
+pub const NON_CONFIG_KEYWORDS: [&'static str; 7] = [
     CONFIG_KEYWORD,
     SOURCE_KEYWORD,
     IF_KEYWORD,
@@ -44,5 +43,4 @@ pub const NON_CONFIG_KEYWORDS: [&'static str; 8] = [
     ENDIF_KEYWORD,
     END_MENU_KEYWORD,
     MENU_CONFIG_KEYWORD,
-    END_MENU_CONFIG_KEYWORD,
 ];

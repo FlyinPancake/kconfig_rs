@@ -6,6 +6,5 @@ use crate::structure::kconfig_node_children::KconfigNodeChildren;
 pub struct KconfigMenuConfigNode {
     pub symbol: KconfigSymbol,
 
-    pub children: KconfigNodeChildren,
     pub config: KconfigConfig,
 }
