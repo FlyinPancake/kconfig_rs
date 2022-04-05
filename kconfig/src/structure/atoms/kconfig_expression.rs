@@ -12,7 +12,7 @@ impl KconfigExpression {
     }
 
     pub fn included_symbols(&self) -> Vec<KconfigSymbol> {
-        const OPERATORS: &str = "&=()|!";
+        const OPERATORS: &str = "&=()|!\\";
         let mut rip_string = self.source.clone();
         for op in OPERATORS.chars() {
             rip_string = rip_string.replace(op, " ");
