@@ -28,7 +28,7 @@ impl KconfigParser<Building> {
 
     // pub fn set_kconfig_source()
 
-    pub fn parse(mut self) -> KconfigParser<Done> {
+    pub fn parse(self) -> KconfigParser<Done> {
         let mut parsing_parser: KconfigParser<Parsing> = KconfigParser {
             state: Default::default(),
             top_kconfig_source: self.top_kconfig_source,

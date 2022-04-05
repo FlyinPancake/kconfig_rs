@@ -1,4 +1,3 @@
-use crate::structure::atoms::KconfigSymbol;
 use crate::structure::property::{KconfigDependenciesProperty, KconfigHelpProperty, KconfigReverseDependenciesProperty, KconfigTypeProperty};
 
 pub struct KconfigConfig {

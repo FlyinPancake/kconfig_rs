@@ -2,7 +2,6 @@ use crate::structure::kconfig_node_children::KconfigNodeChildren;
 use crate::structure::property::KconfigDependenciesProperty;
 
 pub struct KconfigMenuNode {
-    //TODO menu dependencies
     pub name: String,
     pub dependencies: KconfigDependenciesProperty,
     pub(crate) children: KconfigNodeChildren,

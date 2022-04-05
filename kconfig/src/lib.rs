@@ -6,6 +6,9 @@ pub mod parser;
 pub mod structure;
 
 #[cfg(test)]
+pub mod test_utils;
+
+#[cfg(test)]
 mod tests {
     #[test]
     fn it_works() {

@@ -13,16 +13,14 @@ fn get_empty_menu_node_from_header(
     let header_line = span.get_source_span()[0];
     let mut header_tokens = LineKConfigTokenizerIterator::from_line(header_line);
 
-    let no_header_error = ParserError::syntax_in_span_at("Expected menu keyword", &span, 0);
-    let header_keyword = header_tokens.next()
-        .ok_or(no_header_error.clone())?;
-    if header_keyword != MENU_KEYWORD {
-        return Err(no_header_error);
+    if !header_tokens.next()
+        .contains(&MENU_KEYWORD) {
+        return Err(ParserError::syntax_in_span_at("Expected menu keyword", &span, 0));
     }
 
     let mut menu_node = KconfigMenuNode::new_empty();
     menu_node.name = header_tokens.next()
-        .ok_or(ParserError::syntax_in_span_at("Expected header name", &span, 0))?
+        .ok_or(ParserError::syntax_in_span_at("Expected menu name", &span, 0))?
         .to_string();
 
     Ok(menu_node)
