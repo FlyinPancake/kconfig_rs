@@ -16,5 +16,5 @@ pub fn live() {
     // LMAO
     let el = time.elapsed().as_millis();
     let size = format!("{:?}", kconfig).len();
-    println!("Took {} ms, debug printed: {}", el, size)
+    println!("Took {} ms, debug printed: {}, for live", el, size)
 }

@@ -13,6 +13,6 @@ pub fn basic() {
         .take_result().unwrap();
 
     // LMAO
-    println!("{:#?}", kconfig);
-    println!("Took {} ms", time.elapsed().as_millis())
+    println!("Childrens: {:#?}", kconfig.children.children.len());
+    println!("Took {} ms for basic", time.elapsed().as_millis())
 }
