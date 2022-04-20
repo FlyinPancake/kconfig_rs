@@ -2,6 +2,11 @@
 name = "kconfig"
 version = "0.1.0"
 edition = "2021"
+authors = ["Dewyer <dewyer@users.noreply.github.com>", "Domonkos Pálvölgyi <flyinpancake@users.noreply.github.com>"]
+description = "WIP crate for the KConfig DSL in the Linux kernel"
+license = "GPL-2.0-or-later"
+repository = "https://github.com/FlyinPancake/kconfig_rs"
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
