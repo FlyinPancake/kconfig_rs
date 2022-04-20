@@ -6,6 +6,9 @@ authors = ["Dewyer <dewyer@users.noreply.github.com>", "Domonkos Pálvölgyi <fl
 description = "WIP crate for the KConfig DSL in the Linux kernel"
 license = "GPL-2.0-or-later"
 repository = "https://github.com/FlyinPancake/kconfig_rs"
+homepage = "https://github.com/FlyinPancake/kconfig_rs"
+documentation = "https://github.com/FlyinPancake/kconfig_rs"
+readme = "README.md"
 
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
