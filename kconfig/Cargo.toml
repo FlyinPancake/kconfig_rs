@@ -1,5 +1,5 @@
 [package]
-name = "kconfig"
+name = "kconfig-linux"
 version = "0.1.0"
 edition = "2021"
 authors = ["Dewyer <dewyer@users.noreply.github.com>", "Domonkos Pálvölgyi <flyinpancake@users.noreply.github.com>"]
