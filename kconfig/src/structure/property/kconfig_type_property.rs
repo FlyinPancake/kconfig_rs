@@ -1,22 +1,18 @@
 pub use crate::parser::constants::{
-    BOOL_KEYWORD,
-    TRISTATE_KEYWORD,
-    STRING_KEYWORD,
-    HEX_KEYWORD,
-    INT_KEYWORD,
+    BOOL_KEYWORD, HEX_KEYWORD, INT_KEYWORD, STRING_KEYWORD, TRISTATE_KEYWORD,
 };
 use crate::structure::atoms::KconfigDependency;
 
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq, Hash)]
 pub enum ConfigType {
     Bool,
     Tristate,
     String,
     Hex,
-    Int
+    Int,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Hash)]
 pub struct KconfigTypeProperty {
     pub config_type: ConfigType,
 

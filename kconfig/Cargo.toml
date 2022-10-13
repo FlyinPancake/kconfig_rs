@@ -1,8 +1,11 @@
 [package]
 name = "kconfig-linux"
-version = "0.1.1"
+version = "0.2.0"
 edition = "2021"
-authors = ["Dewyer <dewyer@users.noreply.github.com>", "Domonkos Pálvölgyi <flyinpancake@users.noreply.github.com>"]
+authors = [
+    "Dewyer <dewyer@users.noreply.github.com>",
+    "Domonkos Pálvölgyi <flyinpancake@users.noreply.github.com>",
+]
 description = "WIP crate for the KConfig DSL in the Linux kernel"
 license = "GPL-2.0-or-later"
 repository = "https://github.com/FlyinPancake/kconfig_rs"
@@ -16,5 +19,4 @@ readme = "README.md"
 [dependencies]
 anyhow = "1.0.56"
 regex = { version = "1.5.5", features = ["pattern"] }
-uuid = { version = "0.8.2", features = ["v4"]}
 thiserror = "1.0.30"

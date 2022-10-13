@@ -1,6 +1,6 @@
 use crate::structure::atoms::kconfig_expression::KconfigExpression;
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Hash)]
 pub struct KconfigDependency {
     pub expression: KconfigExpression,
 }

@@ -1,6 +1,6 @@
 use crate::structure::atoms::KconfigDependency;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Hash)]
 pub struct KconfigDependenciesProperty {
     pub dependencies: Vec<KconfigDependency>,
 }
@@ -12,10 +12,7 @@ impl KconfigDependenciesProperty {
         }
     }
 
-    pub fn add_dependency(
-        &mut self,
-        dep: KconfigDependency,
-    ) {
+    pub fn add_dependency(&mut self, dep: KconfigDependency) {
         self.dependencies.push(dep);
     }
 }
