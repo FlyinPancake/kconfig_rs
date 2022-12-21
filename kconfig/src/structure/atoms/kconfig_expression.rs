@@ -3,8 +3,9 @@ use crate::structure::atoms::kconfig_symbol::KconfigSymbol;
 #[derive(Clone, Debug, PartialEq, Hash)]
 pub struct KconfigExpression {
     pub source: String,
-    // pub included_symbols: Vec<KconfigSymbol>,
 }
+
+const OPERATORS: &str = "yn&=()|!\\;m'";
 
 impl KconfigExpression {
     pub fn new(source: String) -> Self {
@@ -12,7 +13,6 @@ impl KconfigExpression {
     }
 
     pub fn included_symbols(&self) -> Vec<KconfigSymbol> {
-        const OPERATORS: &str = "yn&=()|!\\;m'";
         let mut rip_string = self.source.clone();
         for op in OPERATORS.chars() {
             rip_string = rip_string.replace(op, " ");
@@ -24,6 +24,11 @@ impl KconfigExpression {
                 name: s.to_string(),
             })
             .collect()
+    }
+
+    pub fn check_if_met(&self, set_options: &Vec<KconfigSymbol>) -> bool {
+        if self.source.contains("(") && self.source.contains(")") {}
+        false
     }
 }
 
@@ -45,5 +50,11 @@ mod test {
             ],
             expression.included_symbols()
         )
+    }
+
+    fn happy_path_not_symbol_works() {
+        let source = KconfigExpression::new("!ASDF".to_string());
+        let set_symbols: Vec<KconfigSymbol> = vec![];
+        assert!(source.check_if_met(&set_symbols))
     }
 }
